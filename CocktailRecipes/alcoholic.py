@@ -2,7 +2,6 @@ import requests
 import json
 import urllib.request
 from PIL import Image
-import random
 
 while True:
     choice = input("Alcoholic or Non-Alcoholic? (A/N)")
@@ -12,20 +11,21 @@ while True:
     else:
         break
 
+url2 = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic'
+url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic'
+
 if choice is 'a' or 'A':
-    url1 = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic'
-    r = requests.get(url1)
+    r = requests.post(url1)
     recipe = json.loads(r.content)
     data = list(recipe.items())
 else:
-    url2 = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic'
-    r = requests.get(url2)
+    r = requests.post(url2)
     recipe = json.loads(r.content)
     data = list(recipe.items())
 
 print(data)
 
-"""
+
 def number_of_ingredients():
     number = 1
     for i in range(2, 16):
@@ -81,4 +81,3 @@ else:
         print(i)
 print("\nInstructions: {}\n".format(random.instructions))
 pic.show()
-"""
