@@ -2,30 +2,12 @@ import requests
 import json
 import urllib.request
 from PIL import Image
-import random
 
-while True:
-    choice = input("Alcoholic or Non-Alcoholic? (A/N)")
-    if choice not in 'ANan':
-        print("Not a valid option!")
-        continue
-    else:
-        break
+url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+r = requests.get(url)
+recipe = json.loads(r.content)
+data = list(recipe.items())[0][1][0]
 
-if choice is 'a' or 'A':
-    url1 = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic'
-    r = requests.get(url1)
-    recipe = json.loads(r.content)
-    data = list(recipe.items())
-else:
-    url2 = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic'
-    r = requests.get(url2)
-    recipe = json.loads(r.content)
-    data = list(recipe.items())
-
-print(data)
-
-"""
 def number_of_ingredients():
     number = 1
     for i in range(2, 16):
@@ -38,7 +20,6 @@ def number_of_ingredients():
 
 
 class cocktail:
-
     def __init__(self, drink, glass, instructions, ingredients, category):
         self.drink = drink
         self.glass = glass
@@ -60,16 +41,13 @@ def contents():
     return amounts
 
 
-random = cocktail(str(data['strDrink']), str(data['strGlass']), str(data['strInstructions']), contents(), str(data['strCategory']))
-
+random = cocktail(str(data['strDrink']), str(data['strGlass']), str(data['strInstructions']), contents(),
+                  str(data['strCategory']))
 img = "{}/preview".format(data['strDrinkThumb'])
 urllib.request.urlretrieve(img, "{}.jpg".format(random.drink))
 pic = Image.open("{}.jpg".format(random.drink))
-
-
 method = ['{}: {}'.format(i, a) for a, i in random.ingredients if a is not None]
 add = [a for a, i in random.ingredients if a is None]
-
 print("{}\n({})\n\nServe in a {}".format(random.drink, random.category, random.glass))
 print("\nIngredients:\n")
 if len(add) == 0:
@@ -81,4 +59,3 @@ else:
         print(i)
 print("\nInstructions: {}\n".format(random.instructions))
 pic.show()
-"""
