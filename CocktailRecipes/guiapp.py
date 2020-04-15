@@ -9,17 +9,17 @@ def window():
     widget = QWidget()
 
     button1 = QPushButton(widget)
-    button1.setText("Button1")
+    button1.setText("Alcoholic")
     button1.move(64, 32)
     button1.clicked.connect(button1_clicked)
 
     button2 = QPushButton(widget)
-    button2.setText("Button2")
+    button2.setText("Non alcoholic")
     button2.move(64, 64)
     button2.clicked.connect(button2_clicked)
 
     widget.setGeometry(50, 50, 320, 200)
-    widget.setWindowTitle("PyQt5 Button Click Example")
+    widget.setWindowTitle("I Need A Drink")
     widget.show()
     sys.exit(app.exec_())
 
