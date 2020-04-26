@@ -3,9 +3,7 @@ import json
 import urllib.request
 from PIL import Image
 
-id = input("Enter ID: ")
-
-url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={}".format(id)
+url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
 r = requests.get(url)
 recipe = json.loads(r.content)
 data = list(recipe.items())[0][1][0]
